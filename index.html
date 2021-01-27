@@ -8,8 +8,112 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-     <div id="loging-area">
-         <h1>Wellcome To Pionear Bank</h1>
+     <div id="loging-area" class="container">
+         <h1 class="text-center">Wellcome To Pionear Bank</h1>
+         <div class="submit-area">
+             <h2>Login</h2>
+          <input type="email" class="form-control mt-3" placeholder="Enter your E-mail">
+
+         <input type="password" class="form-control mt-3" placeholder="Enter your password">
+             <button class="btn btn-success mt-3" id="login">Enter</button>
+         </div>
      </div> 
+      <!--Trancjaction Area-->
+        <div id="transjaction-area" class="container">
+           <div class="row">
+               <div class="col-md-4">
+                <div class="Deposit status">
+                    <h5>Deposit</h5>
+                    <h2>$ <span id="currentdeposit">00</span></h2>
+                </div>
+               </div>
+              
+               <div class="col-md-4">
+                   <div class=" Widthdraw status">
+                    <h5>Widthdraw</h5>
+                    <h2>$ <span id="addWidthAmount">00</span> </h2>
+                   </div>
+               </div>
+               <div class="col-md-4">
+                   <div class="Blance status">
+                    <h5>Blance</h5>
+                    <h2>$ <span id="currentBlance">1200</span></h2>
+                   </div>
+               </div>
+           </div>
+           <div class="row">
+               <div class="col-md-6">
+                  <div class="submit-area">
+                    <h4>Deposit</h4>
+                    <input id="depositAmount" type="text" class="form-control mt-3" placeholder="$ amount you want to deposit">
+                    <button id="addDeposit" class="btn btn-success mt-3">Deposit</button>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="submit-area">
+                    <h4>Widthdraw</h4>
+                    <input id="widhdrawAmount" type="text" class="form-control mt-3" placeholder="$ amount you want to withdraw">
+                    <button id="widhdrwbtn" class="btn btn-success mt-3">Widthdraw</button>
+                  </div> 
+               </div>
+           </div>
+        </div>
+     <!--  javaScript code  -->
+       <script>
+             // login event handler
+           const loginbtn = document.getElementById('login');
+           loginbtn.addEventListener('click',function(){
+               const logingArea = document.getElementById('loging-area');
+               logingArea.style.display = 'none';
+               const TrancjactionArea = document.getElementById('transjaction-area');
+               TrancjactionArea.style.display = 'block';
+           })
+             // depposit button event handler
+              const depositBtn = document.getElementById('addDeposit');
+              depositBtn.addEventListener('click',function(){
+                 const depositionAmount = document.getElementById('depositAmount').value;
+                 const depositNumber = parseFloat(depositionAmount);
+                
+                //  const currentDeposit = document.getElementById('currentdeposit').innerText;
+                //  const currentDepositNumber = parseFloat(currentDeposit);
+                //  const totaldeposit = depositNumber + currentDepositNumber;
+                // document.getElementById('currentdeposit').innerText = totaldeposit;
+
+                updateSpanText('currentBlance',depositNumber) // function calling by blace added
+                updateSpanText('currentdeposit', depositNumber) // function calling by deposit added
+                document.getElementById('depositAmount').value = "";
+                
+              })
+                   // widthdraw button event handler
+                   const widthdrawBtn = document.getElementById('widhdrwbtn');
+                  widthdrawBtn.addEventListener('click',function(){
+                     const widthdrawAmount = document.getElementById('widhdrawAmount').value;
+                    const withdrawNumber = parseFloat(widthdrawAmount);
+
+                const addedwidthdraw = document.getElementById('addWidthAmount').innerText;
+                const addedwidthdrawNumber = parseFloat(addedwidthdraw);
+                const widthdrawtotal = withdrawNumber + addedwidthdrawNumber;
+                document.getElementById('addWidthAmount').innerText = widthdrawtotal;
+
+                
+                      const currentblance = document.getElementById('currentBlance').innerText;
+                       const currentblancNumber = parseFloat(currentblance);
+                       const totalblance = currentblancNumber - withdrawNumber;
+                       document.getElementById('currentBlance').innerText = totalblance;
+                       document.getElementById('widhdrawAmount').value = "";
+
+                  })
+                function updateSpanText(id,added){
+                const current = document.getElementById(id).innerText;
+                const currenNumber = parseFloat(current);
+                const totalAmount = added + currenNumber ;
+                document.getElementById(id).innerText = totalAmount;
+
+              
+                
+               
+               }
+       </script>
+    
 </body>
 </html>
